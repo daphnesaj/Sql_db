@@ -1,5 +1,5 @@
 # Question 1:
-Find the sum of the salaries of all employees whose manager’s ssn is 333445555.
+Find the sum of the salaries of all employees whose managerâ€™s ssn is 333445555.
 As well as the name of the department and the max, min, average salary of the employees in this department
 and the total number of employees in this department
 
@@ -11,7 +11,7 @@ GROUP BY DNAME
 
 
 # Question 2:
-For each department, retrieve the department manager’s name, his supervisor, maxi& min salary
+For each department, retrieve the department managerâ€™s name, his supervisor, maxi& min salary
 and total number of employees in the department. As well as the name of the department
 
 # QUERY
@@ -33,7 +33,7 @@ group by dname,mgr_ssn,emp.fname,Emp.Super_ssn,Esuper.fname
  
 # Question 3: 
 For each project on which more than 2 employees work, retrieve the project number, project name, number of employees working on that project,
-the controlling department name, manager name, department number and manager’s salary
+the controlling department name, manager name, department number and managerâ€™s salary
 
 # QUERY
 
@@ -110,7 +110,7 @@ group by FNAME,LNAME,ssn,DNO,PNAME,hours,dname
 	WHERE [Wages] = (SELECT MAX([Wages]) FROM [Company Cs2])
 
 	
---#Query 6 (last)''''''Manager with the highest salary.
+--#Query 6 (last).....Manager with the highest salary.
 	SELECT Fname
 	From employee, department
 	Where Mgr_Ssn = Ssn AND salary = (Select MAX(salary) From employee join Department On Ssn = Mgr_Ssn)
