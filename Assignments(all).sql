@@ -53,9 +53,10 @@ DELETE FROM [table name]
 
 
 
-# Q5 : Create a view table Company CS2 
+# Q5 :--Create a view table Company CS2 
 
-DROP VIEW IF EXISTS [COMPANY CS2]
+--DROP VIEW IF EXISTS [COMPANY CS2]
+
 CREATE VIEW [Company CS2] AS
 SELECT E.FNAME, E.LNAME ,E.SSN,E.super_ssn,Emp.fname as [Sup Name] ,dname,E.dno, Pname,Hours *1.5 as [Wages]
 FROM EMPLOYEE as E
@@ -65,12 +66,56 @@ group by E.FNAME,E.LNAME,E.ssn,E.DNO,PNAME,hours,dname,Emp.fname,E.super_ssn
 
 
 
+--OR
+
 
 
 DROP VIEW IF EXISTS [COMPANY CS2]
+
 CREATE VIEW [Company CS2] AS
 SELECT FNAME, LNAME ,SSN ,dname,dno, Pname,Hours *1.5 as [Wages]
 FROM EMPLOYEE, DEPARTMENT,PROJECT, WORKS_ON
 WHERE EMPLOYEE.SSN=WORKS_ON.Essn AND PROJECT.Pnumber=WORKS_ON.Pno and DEPARTMENT.Dnumber=EMPLOYEE.dno
 group by FNAME,LNAME,ssn,DNO,PNAME,hours,dname
 
+--+
+
+--Class activities
+
+--#Query 1
+		Select *
+		From [Company Cs2]
+
+--#Query 2
+	SELECT [Fname] as 'Employee', [Dname] as 'Department', [Pname] as 'Project'
+	FROM [Company Cs2]
+	WHERE [Wages] = (SELECT MAX([Wages]) FROM [Company Cs2])
+
+--#Query 3
+	Select Sum(wages) as Total, Avg(wages) as average
+	From [Company Cs2]
+	Group By[PNAME]
+	
+
+--Query 4
+	SELECT Fname, COUNT(*)as Number_of_Dependents
+	FROM employee, [Dependent]
+	Where Ssn = Essn
+	Group by Fname
+
+
+--#Query 5
+	SELECT [Pname] as 'Project'
+	FROM [Company Cs2]
+	WHERE [Wages] = (SELECT MAX([Wages]) FROM [Company Cs2])
+
+	
+--#Query 6 (last)''''''Manager with the highest salary.
+	SELECT Fname
+	From employee, department
+	Where Mgr_Ssn = Ssn AND salary = (Select MAX(salary) From employee join Department On Ssn = Mgr_Ssn)
+	Group by Fname
+	
+	
+
+	
